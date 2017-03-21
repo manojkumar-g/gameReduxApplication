@@ -1,0 +1,233 @@
+@import 'jeet'
+@import 'rupture'
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
+$text-selection $red
+*
+  box-sizing border-box
+  position relative
+  font-family Raleway
+
+header
+  background $navy
+  height 30vh
+  .title
+    font-family Pacifico
+    color $white
+    margin-left 1vw
+    +below(600px)
+      center(300px)
+.icon
+  color $yellow
+  transform rotate(-45deg)
+  margin-right 2vw
+main
+  center(960px)
+  margin-top -10vh
+  background $white
+  height 85vh
+  border-radius 5px
+.search
+  column(1)
+.input
+  center(940px)
+  input
+    input white
+    box-shadow 0px 0px 0px -200px rgba(0,0,0,0.75)
+    border 0
+    border-bottom .5vh solid
+    border-radius 0px
+    column(1)
+    margin-top 2vh
+    height 5vh
+    font-size 2vh
+    &:focus
+      border 0px $white
+      box-shadow 0px 0px 0px -200px rgba(0,0,0,0.75);
+    &:focus + label
+      column(1)
+  label
+    display block
+    background $orange
+    transition all 0.5s
+    column(1)
+    width 0
+    height .5vh
+    margin-top -.5vh
+.filterbar
+  column(1)
+  background $silver
+  border-radius 5px
+  margin-top 1vh
+  label
+    span(1/12)
+    margin 1.5vw
+    cursor pointer
+.filterresults
+    span(10/12,cycle:10)
+    ul
+      inline-list()
+      li
+        font-size 13px
+#filter
+  position absolute
+  margin-left -9999px
+  visibility hidden
+  &:checked + label
+    color $orange
+#filtermodel
+  absolute()
+  background $white
+  z-index 1
+  column(1/2)
+  margin-top 20vh
+  box-shadow 10px 10px 59px 0px rgba(0,0,0,0.75)
+  +below(600px)
+    column(1)
+.modelview
+  column(1)
+  position relative
+  height 60vh
+.modelheader
+  position relative
+  height 10vh
+  column(1)
+  padding 2vh
+.clear
+  cursor pointer
+  column(2/3)
+  color $gray
+.apply
+  cursor pointer
+  column(1/3)
+  color $maroon
+  &:hover
+    span
+      border-bottom 1px solid
+.results
+  margin-top 7vh
+.games
+  column(1)
+  margin-top 2vh
+
+.game
+  column(1/3 1,$cycle:3)
+  height 500px
+  margin-bottom 2vh
+  box-shadow: 9px 10px 62px 6px rgba(0,0,0,0.75);
+  +below(600px)
+    column(1/2 1,$cycle:2)
+  +mobile()
+    stack()
+.gamesection
+  column(1)
+  height 400px
+.poster
+  width 100%
+  height 100%
+.describe
+  column(1)
+  height 100px
+  padding .5vh
+  h5
+    color $red
+    height 20px
+  ul
+    column(1)
+    inline-list()
+    li
+      i
+        position relative
+        color red
+        margin-right 5px
+        height 10px
+        &:after
+          content ''
+          position absolute
+          bottom 0
+          left 0
+          height 20px
+          width 20px
+      color $red
+      span
+        color $olive
+        fs(13px)
+        bold()
+.ec
+  position absolute
+  bottom 0
+  right 0
+  background $orange
+  color $white
+  border-radius 200px 0px 0px 0px
+  padding .99vw
+  padding-bottom 2vh
+  width 2vw
+  height 3vh
+.nav
+  position absolute
+  bottom 2vh
+  left 2vh
+  column(1)
+  uppercase()
+  ul
+    inline-list()
+    li
+      cursor pointer
+    :hover
+      border-bottom 4px solid
+      bold()
+      color $red
+.filteractive
+  border-bottom 4px solid
+  bold()
+  color $red
+
+.crums
+  inline-list 5vw
+  li
+    background $silver
+    border-radius 16px
+    margin 1vh
+    padding 2vh
+    cursor pointer
+  .crumActive
+    background $green
+.scorediv
+  center(300px)
+  h1
+    column(1)
+    padding 0
+    margin-top 2vh
+    margin-left 75px
+    color tomato
+    font-size 10vw
+.score
+  center(column(1))
+  range-input(tomato, 100%, 1.5em)
+#noScore
+  color $gray
+.filterresults
+  overflow scroll
+  ul
+    inline-list()
+    li
+      background $green
+      border-radius 16px
+      margin 1vh
+      padding 2vh
+      cursor pointer
+.pagination
+    inline-list()
+    li
+      width 2vw
+      padding .7vw
+      cursor pointer
+.pages
+  center(600px)
+  height 10vh
+  column(1)
+.active
+    border-radius 50%
+    background $red
