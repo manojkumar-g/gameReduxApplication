@@ -6,7 +6,7 @@ const Search = ({filter})=>{
   return(
     <div className="search">
         <div className="input">
-          <input type="text" placeholder = 'Search By Movie Name'
+          <input type="text" placeholder = 'Search By Game Name'
             ref = {
                 node => {
                   input = node

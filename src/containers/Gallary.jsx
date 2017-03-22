@@ -39,7 +39,7 @@ class Gallary extends React.Component {
     var {pageData} = this.state;
     return(
       <section className="games">
-         {pageData.length === 0 && <h1>No Games Found</h1>}
+         {pageData.length ==0 && <h1>No Games Found</h1>}
 
         {
           pageData.map(

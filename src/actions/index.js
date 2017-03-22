@@ -1,5 +1,5 @@
-import fetch from 'isomorphic-fetch';
 
+import axios from 'axios';
 export const addSingleFilter = (filterName) => ({
   type :'ADD_SINGLE_FILTER',
   filterName
@@ -27,16 +27,15 @@ export const filterByName = (name) =>
 export const getGames = () =>
   dispatch => {
     dispatch(loadingGameData());
-    return fetch('http://localhost:1234/getGames')
-            .then(response => response.json())
-            .then(data =>{
-                  dispatch(setGameData(data))
-                }
-              )
-            .catch(
-              err =>
-                dispatch(setError('Error While Fetching'))
-            )
+    axios.get('http://localhost:1234/getGames')
+        .then(response => {
+            dispatch(setGameData(response.data))
+        })
+        .catch(
+            err =>
+                dispatch(setError('Error while Fetching Data'))
+        )
+
   }
 
 const setGameData = (data) =>({
@@ -50,3 +49,20 @@ const setError = (error) => ({
   type : 'SET_ERROR',
   error
 });
+
+const requestForRegistration = (data) =>
+    dispatch =>{
+        dispatch(reqRegistration())
+        axios.post('/auth/signup',data)
+             .then(response => response.status === 200 ? dispatch(successRegistration()) : dispatch(failureRegistration()))
+    }
+
+const successRegistration = () => ({
+    type : 'SUCCESS_REGISTRATION'
+});
+const reqRegistration = () => ({
+    type : 'REQUEST_REGISTRATION'
+});
+const failureRegistration = () => ({
+    type : 'FAILURE_REGISTRATION'
+})
