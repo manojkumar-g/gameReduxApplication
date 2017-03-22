@@ -1,5 +1,5 @@
 import React from 'react';
-import {Motion,spring,presets} from 'react-motion';
+import {Motion,spring,presets,TransitionMotion} from 'react-motion';
 import FilterContent from './FilterContent.jsx'
 export default class Filter extends React.Component{
   constructor(props) {
@@ -11,6 +11,31 @@ export default class Filter extends React.Component{
   toggleModel = () => this.setState({
     modelShow : !this.state.modelShow
   })
+  willEnter(){
+      return{
+          width : 0,
+          opacity : 1
+      }
+  }
+  willLeave(){
+      return{
+          width : spring(0),
+          opacity : spring(0)
+      }
+  }
+  getDefaultStyles = () => {
+      var x = this.props.allFilters.map(
+          (filter,key) => ({data:filter,key:'allFilters'+key,style:{width:0,opacity:1}})
+      );
+      console.log(x);
+  }
+  getStyles = ()=>{
+      var x = this.props.allFilters.map(
+          (filter,key) => ({data :filter,key:'allFilters'+key,style:{width:spring(90,presets.gentle),opacity:spring(1,presets.gentle)}})
+      )
+      return x;
+
+  }
   render(){
     return(
       <div>
@@ -20,22 +45,34 @@ export default class Filter extends React.Component{
               onChange = {this.toggleModel}
             />
             <label htmlFor="filter">
-              Filters
+              <span className = 'filterspan'>Filters</span>
               <i className="fa fa-filter fa-2x" aria-hidden="true"></i>
             </label>
 
           </div>
           <div className="filterresults">
-            <ul>
-              {
-                this.props.allFilters.map(
-                  (filter,key) =>
-                      <li key = {'Filter'+key}>
-                        {filter}
-                      </li>
-                )
-              }
-            </ul>
+
+            <TransitionMotion
+                willLeave = {this.willLeave}
+                willEnter = {this.willEnter}
+                defaultStyles = {this.getDefaultStyles()}
+                styles={this.getStyles()}
+            >
+            {
+                styles =>
+                    <ul>
+                    {
+
+                        styles.map(
+                            filter => <li key = {filter.key} style ={{width : filter.style.width + 'px', opacity : filter.style.opacity}}>
+                                            {filter.data}
+                                     </li>
+                        )
+                    }
+
+                    </ul>
+            }
+            </TransitionMotion>
           </div>
         </div>
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import data from './../data.js';
 import {connect} from 'react-redux';
-import {addAllFilters,clearAllFilters} from './../actions'
+import {addAllFilters,clearAllFilters,addSingleFilter,removeSingleFilter} from './../actions'
 class Content extends React.Component{
   constructor(props) {
     super(props);
@@ -75,7 +75,11 @@ class Content extends React.Component{
                     key = {key}
                     className = {isSelected ? 'crumActive' : ''}
                     onClick ={
-                      () => this.toggleFilter(key)
+                      () => {
+                          this.toggleFilter(key);
+                          isSelected ? this.props.removeSingleFilter(name):this.props.addSingleFilter(name)
+
+                      }
                     }
                     >
                     {name}
@@ -100,7 +104,10 @@ class Content extends React.Component{
                     key = {key}
                     className = {isSelected ? 'crumActive' : ''}
                     onClick ={
-                      () => this.toggleGenre(key)
+                      () => {
+                          this.toggleGenre(key)
+                          isSelected ? this.props.removeSingleFilter(name):this.props.addSingleFilter(name)
+                      }
                     }
                     >
                     {name}
@@ -199,5 +206,5 @@ class Content extends React.Component{
 
 export default connect(
   undefined,
-  ({addAllFilters,clearAllFilters})
+  ({addAllFilters,clearAllFilters,addSingleFilter,removeSingleFilter})
 )(Content)

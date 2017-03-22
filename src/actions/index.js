@@ -1,5 +1,13 @@
 import fetch from 'isomorphic-fetch';
 
+export const addSingleFilter = (filterName) => ({
+  type :'ADD_SINGLE_FILTER',
+  filterName
+});
+export const removeSingleFilter = (filterName) => ({
+  type :'REMOVE_SINGLE_FILTER',
+  filterName
+});
 export const addAllFilters = (filters) => ({
   type :'ADD_ALL_FILTERS',
   filters

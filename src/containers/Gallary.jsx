@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Game from '../components/Game.jsx'
 import slice from 'lodash/slice';
+import {sping,TransitionMotion,presets} from 'react-motion'
 class Gallary extends React.Component {
   constructor(props) {
     super(props);
@@ -33,10 +34,13 @@ class Gallary extends React.Component {
       </ul>
     )
   }
+
   render(){
     var {pageData} = this.state;
     return(
       <section className="games">
+         {pageData.length === 0 && <h1>No Games Found</h1>}
+
         {
           pageData.map(
             (game,key) =>

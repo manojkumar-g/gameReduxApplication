@@ -16,6 +16,7 @@ header
     font-family Pacifico
     color $white
     margin-left 1vw
+    cursor pointer
     +below(600px)
       center(300px)
 .icon
@@ -55,6 +56,7 @@ main
     width 0
     height .5vh
     margin-top -.5vh
+
 .filterbar
   column(1)
   background $silver
@@ -64,12 +66,9 @@ main
     span(1/12)
     margin 1.5vw
     cursor pointer
-.filterresults
-    span(10/12,cycle:10)
-    ul
-      inline-list()
-      li
-        font-size 13px
+.filterspan
+    +mobile()
+        display none
 #filter
   position absolute
   margin-left -9999px
@@ -209,25 +208,29 @@ main
 #noScore
   color $gray
 .filterresults
-  overflow scroll
+  overflow auto
   ul
     inline-list()
     li
-      background $green
+      background $navy
+      color $white
       border-radius 16px
-      margin 1vh
-      padding 2vh
+      margin-top 10px
+      padding  5px
       cursor pointer
+      font-size 10px
+      height 20px
 .pagination
     inline-list()
+    column(1)
+    display block
     li
       width 2vw
       padding .7vw
       cursor pointer
 .pages
-  center(600px)
   height 10vh
-  column(1)
+  display block
 .active
     border-radius 50%
     background $red
