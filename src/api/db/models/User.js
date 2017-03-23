@@ -10,7 +10,8 @@ var User = mongoose.Schema({
 });
 
 //a method for validting a password with generated hassed password
-User.methods.validatePassword = (passwd,cb) => {
+User.methods.validatePassword = function(passwd,cb){
+  let thisPassword = this.password;
   bcrypt.compare(passwd,this.password,(err,isMatch) =>{
     if(err)
       return cb(err);

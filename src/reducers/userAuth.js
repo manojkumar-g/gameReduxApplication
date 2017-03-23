@@ -3,7 +3,10 @@ const reducer = (
                 state = {
                     isLoggedIn : false,
                     messages : [],
-                    requestForRegister : false
+                    requestForRegister : false,
+                    requestForLogin : true,
+                    firstName : '',
+
                 },
                 action
               ) => {
@@ -15,13 +18,30 @@ const reducer = (
                         requestForRegister :true
                     }
                     break;
+                case 'REQUEST_LOGIN':
+                    return{
+                        ...state,
+                        requestForLogin :true
+                    }
+                    break;
                 case 'SUCCESS_REGISTRATION':
                     return {
                         ...state,
                         requestForRegister : false,
                         messages : [...state.messages,
-                                    'Successfully Registered'
+                                    action.message
                                     ]
+                    }
+                    break;
+                case 'SUCCESS_LOGIN':
+                    return {
+                        ...state,
+                        requestForRegister : false,
+                        messages : [...state.messages,
+                                    {key: action.key , data : action.message}
+                                  ],
+                        isLoggedIn : true,
+                        firstName : action.name
                     }
                     break;
                 case 'FAILURE_REGISTRATION':
@@ -29,10 +49,19 @@ const reducer = (
                         ...state,
                         requestForRegister : false,
                         messages : [...state.messages,
-                                    'Failed To Registered'
+                                    {key: action.key , data : action.message}
                                     ]
                     }
                     break;
+                  case 'FAILURE_LOGIN':
+                      return {
+                          ...state,
+                          requestForLogin : false,
+                          messages : [...state.messages,
+                                      {key: action.key , data : action.message}
+                                      ]
+                      }
+                      break;
                 default:
                     return state;
             }

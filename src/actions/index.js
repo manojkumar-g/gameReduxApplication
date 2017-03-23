@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+let count = 0;
 export const addSingleFilter = (filterName) => ({
   type :'ADD_SINGLE_FILTER',
   filterName
@@ -58,8 +59,8 @@ export const requestForRegistration = (data) =>
                response.status === 200 ? dispatch(successRegistration()) : dispatch(failureRegistration())
              })
              .catch(
-               err => {
-                 dispatch(failureRegistration())
+               ({response:{data}}) => {
+                 dispatch(failureRegistration(data.message))
                }
              )
     }
@@ -70,6 +71,35 @@ const successRegistration = () => ({
 const reqRegistration = () => ({
     type : 'REQUEST_REGISTRATION'
 });
-const failureRegistration = () => ({
-    type : 'FAILURE_REGISTRATION'
+const failureRegistration = (message) => ({
+    type : 'FAILURE_REGISTRATION',
+    key : count++,
+    message
+});
+export const requestForLogin = (data) =>
+    dispatch =>{
+        dispatch(reqLogin())
+        return axios.post('http://localhost:1234/login',data)
+             .then(response => {
+               console.log(response.data.token);
+               response.status === 200 ? dispatch(successLogin(response.data.userData.name)) : dispatch(failureLogin(response.data.message))
+             })
+             .catch(
+               ({response:{data}}) => {
+                 dispatch(failureLogin(data.message))
+               }
+             )
+    }
+
+const successLogin = (message) => ({
+    type : 'SUCCESS_LOGIN',
+    message
+});
+const reqLogin = () => ({
+    type : 'REQUEST_LOGIN'
+});
+const failureLogin = (message) => ({
+    type : 'FAILURE_LOGIN',
+    key : count++,
+    message
 })

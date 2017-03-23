@@ -37,6 +37,7 @@
     "html-webpack-plugin": "^2.24.1",
     "isomorphic-fetch": "^2.2.1",
     "jeet": "^7.1.0",
+    "jsonwebtoken": "^7.3.0",
     "line-input-stream": "^1.0.1",
     "mongoose": "^4.9.0",
     "mongoose-double": "^0.0.1",
