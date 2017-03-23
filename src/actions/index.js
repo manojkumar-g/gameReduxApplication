@@ -50,11 +50,18 @@ const setError = (error) => ({
   error
 });
 
-const requestForRegistration = (data) =>
+export const requestForRegistration = (data) =>
     dispatch =>{
         dispatch(reqRegistration())
-        axios.post('/auth/signup',data)
-             .then(response => response.status === 200 ? dispatch(successRegistration()) : dispatch(failureRegistration()))
+        return axios.post('http://localhost:1234/signup',data)
+             .then(response => {
+               response.status === 200 ? dispatch(successRegistration()) : dispatch(failureRegistration())
+             })
+             .catch(
+               err => {
+                 dispatch(failureRegistration())
+               }
+             )
     }
 
 const successRegistration = () => ({

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 //security constraints
 import bcrypt from 'bcrypt-nodejs';
 var User = mongoose.Schema({
-  username: {type:String,unique:true},
+  email: {type:String,unique:true},
   firstName : String,
   LastName : String,
   password:String
@@ -33,4 +33,4 @@ User.pre('save',function(next) {
   });
 });
 
-export default mongoose.model('newuser',User);
+export default mongoose.model('user',User);

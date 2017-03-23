@@ -2,7 +2,7 @@ import React from 'react';
 import Search from './../components/Search.jsx';
 import Filter from './../components/Filter.jsx';
 import {connect} from 'react-redux';
-import {getGames,filterByName,clearAllFilters} from './../actions';
+import {getGames,filterByName,clearAllFilters,requestForRegistration} from './../actions';
 import Gallary from './Gallary.jsx';
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +19,17 @@ class App extends React.Component {
             <i className="fa fa-gamepad fa-2x icon " aria-hidden="true"></i>
             Games Arena
           </h1>
+          <button
+            onClick = {() => {
+              this.props.requestForRegistration({
+                email : 'manoj@wipro.com',
+                password : 'deadpool',
+                firstName : 'Manoj',
+                LastName : 'Kumar'
+              })}
+            }>
+              signup
+          </button>
         </header>
         <main>
           <section>
@@ -34,5 +45,5 @@ class App extends React.Component {
 
 export default connect(
   state => ({allFilters :state.gameData.allFilters}),
-  {getGames,filterByName,clearAllFilters}
+  {getGames,filterByName,clearAllFilters,requestForRegistration}
 )(App)

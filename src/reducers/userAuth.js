@@ -1,10 +1,12 @@
+
 const reducer = (
                 state = {
                     isLoggedIn : false,
                     messages : [],
                     requestForRegister : false
                 },
-                action) => {
+                action
+              ) => {
 
             switch (action.type) {
                 case 'REQUEST_REGISTRATION':
@@ -32,6 +34,8 @@ const reducer = (
                     }
                     break;
                 default:
-
+                    return state;
             }
 }
+
+export default reducer;
