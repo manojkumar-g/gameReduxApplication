@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import Game from './../db/models/Game';
 
 router.get('/', (req, res) => {
+  console.log(req.headers);
   Game.find({},function (err,data) {
         if (err) {
           console.error(err);

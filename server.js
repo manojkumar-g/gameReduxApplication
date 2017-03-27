@@ -13,7 +13,7 @@ import gameRoutes from './src/api/routes/games.js'
 import authRoutes from './src/api/routes/authenticate.js'
 import passport from 'passport';
 var cookieParser = require('cookie-parser');
-var Session = require('express-session');
+
 import passportConfig from './src/api/config/passport';
 connection(conf.dbUri);
 
@@ -31,14 +31,9 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(Session({
-  secret:'IAmBatman',
-  resave : true,
-  saveUninitialized : true,
-  key: 'localhost'
-}));
+
 app.use(passport.initialize());
-app.use(passport.session());
+
 passportConfig(passport);
 
 app.use('/getGames',gameRoutes);

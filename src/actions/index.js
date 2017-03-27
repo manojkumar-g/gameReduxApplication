@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import setAuthorizationToken from '../utils/setAuthorizationToken.js';
 let count = 0;
 export const addSingleFilter = (filterName) => ({
   type :'ADD_SINGLE_FILTER',
@@ -81,7 +82,9 @@ export const requestForLogin = (data) =>
         dispatch(reqLogin())
         return axios.post('http://localhost:1234/login',data)
              .then(response => {
-               console.log(response.data.token);
+               let token = response.data.token;
+               sessionStorage.setItem('accessToken',token);
+               setAuthorizationToken(token);
                response.status === 200 ? dispatch(successLogin(response.data.userData.name)) : dispatch(failureLogin(response.data.message))
              })
              .catch(
@@ -102,4 +105,7 @@ const failureLogin = (message) => ({
     type : 'FAILURE_LOGIN',
     key : count++,
     message
-})
+});
+const reqLogOut = () => ({
+    type : 'REQUEST_LOGOUT'
+});

@@ -6,7 +6,7 @@ const routes = (app,passport) =>{
             next();
           },
           (req,res,next) =>{
-            return passport.authenticate('local-signup', (err) => {
+            return passport.authenticate('local-signup', {session : false},(err) => {
                     if (err) {
                       console.log(err.message);
 
@@ -29,10 +29,12 @@ const routes = (app,passport) =>{
 app.post('/login',
     (req,res,next) => {
       console.log('trying to login as', req.body.email);
+      console.log(req.session);
       next();
     },
     (req,res,next) =>
     passport.authenticate('local-login',
+      {session : false},
       (err,token,userData) => {
         if (err) {
           return res.status(400).json({message : err.message,success:false})

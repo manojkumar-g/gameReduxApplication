@@ -7,7 +7,8 @@ export const localSignUp = new LocalStrategy(
     {
         usernameField: 'email',
         passwordField: 'password',
-        passReqToCallback : true
+        passReqToCallback : true,
+        session :false
     },(req,email,password,done) => {
       User.findOne({email},(err,user)=>{
                                   if(err)
@@ -40,13 +41,13 @@ export const localSignUp = new LocalStrategy(
 
 export const localLogin = new LocalStrategy(
   {usernameField : 'email',
-  passwordField :'password'},
+  passwordField :'password',
+  session : false},
   (email,password,done) => {
     User.findOne({email},
       (err,user) =>{
         if(err)
           return done(err);
-        console.log(user);
         if(user) {
           user.validatePassword(password.trim() ,
             (err,isMatch) => {
@@ -56,7 +57,6 @@ export const localLogin = new LocalStrategy(
                 const payload = {
                                   sub: user._id
                                 };
-                console.log(config.jwtSecret);
                 let token = jwt.sign(payload,config.jwtSecret);
                 let data = {
                   name : user.firstName
